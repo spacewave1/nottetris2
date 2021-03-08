@@ -18,9 +18,7 @@ function menu_load()
 	" design and program ",
 	"by alexey pazhitnov#",
 	"  PS Vita port by  #",
-	"	  spacewave 	 ",
-	" and environment by ",
-	"    Rinnegatamante  "
+	"spacewave"
 	}
 	logotime = 0
 	bootsoundplayed = false
