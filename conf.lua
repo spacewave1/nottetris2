@@ -1,4 +1,4 @@
-function not_tetris_2_vita.conf(t)
+function love.conf(t)
 	t.title = "Not Tetris 2"
 	t.author = "Maurice"
 	t.identity = "not_tetris_2"

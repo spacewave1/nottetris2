@@ -1,4 +1,4 @@
-function init()
+function love.load()
 	--requires--
 	require "controls"
 	require "gameB"
@@ -319,7 +319,7 @@ function loadimages()
 	congratsline:setFilter( "nearest", "nearest" )
 end
 
-function update(dt)
+function love.update(dt)
 	if gamestate == nil then
 		startdelaytime = startdelaytime + dt
 		if startdelaytime >= startdelay then
