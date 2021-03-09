@@ -1,12 +1,12 @@
 function love.load()
 	--requires--
-	require "controls"
-	require "gameB"
-	require "gameBmulti"
-	require "gameA"
-	require "menu"
-	require "failed"
-	require "rocket"
+	dofile("ux0:/data/lpp-vita/samples/nottetris/controls.lua")
+	dofile("ux0:/data/lpp-vita/samples/nottetris/gameB.lua")
+	dofile("ux0:/data/lpp-vita/samples/nottetris/gameBmulti.lua")
+	dofile("ux0:/data/lpp-vita/samples/nottetris/gameA.lua")
+	dofile("ux0:/data/lpp-vita/samples/nottetris/menu.lua")
+	dofile("ux0:/data/lpp-vita/samples/nottetris/failed.lua")
+	dofile("ux0:/data/lpp-vita/samples/nottetris/rocket.lua")
 	
 	vsync = true
 	
@@ -191,7 +191,6 @@ function love.load()
 	piececenterpreview[7] = {13, 9}
 	
 	loadhighscores()
-	loadconfig()
 	
 	loadimages()
 	
@@ -271,8 +270,13 @@ function loadimages()
 	end
 	
 	--font--
-	tetrisfont = newPaddedImageFont("graphics/font.png", "0123456789abcdefghijklmnopqrstTuvwxyz.,'C-#_>:<! ")
-	whitefont = newPaddedImageFont("graphics/fontwhite.png", "0123456789abcdefghijklmnopqrstTuvwxyz.,'C-#_>:<!+ ")
+	-- original
+	--tetrisfont = newPaddedImageFont("graphics/font.png", "0123456789abcdefghijklmnopqrstTuvwxyz.,'C-#_>:<! ")
+	--whitefont = newPaddedImageFont("graphics/fontwhite.png", "0123456789abcdefghijklmnopqrstTuvwxyz.,'C-#_>:<!+ ")
+
+	-- modified font
+	tetrisfont = love.graphics.newFont("graphics/font/Masaaki-Regular.ttf")
+	whitefont = love.graphics.newFont("graphics/font/Masaaki-Regular.ttf")
 	love.graphics.setFont(tetrisfont)
 	
 	--filters!
@@ -499,33 +503,6 @@ function changevolume(i)
 	pausesound:setVolume( i )
 	highscorebeep:setVolume( i )
 	newlevel:setVolume( 0.6*i )
-end
-
-function loadconfig()
-	--standard controls
-	--[[controls = {}
-	controls["left"] = {"left"}
-	controls["right"] = {"right"}
-	controls["down"] = {"down"}
-	controls["rotateleft"] = {"y", "z", "w"}
-	controls["rotateright"] = {"x"}
-	
-	controls["p1left"] = {"a"}
-	controls["p1right"] = {"d"}
-	controls["p1down"] = {"s"}
-	controls["p1rotateleft"] = {"g"}
-	controls["p1rotateright"] = {"h"}
-	
-	controls["p2left"] = {"left"}
-	controls["p2right"] = {"right"}
-	controls["p2down"] = {"down"}
-	controls["p2rotateleft"] = {"kp1"}
-	controls["p2rotateright"] = {"kp2"}
-	
-	local keys = {"left", "right", "down", "rotateleft", "rotateright", "p1left", "p1right", "p1down", "p1rotateleft", "p1rotateright", "p2left", "p2right", "p2down", "p2rotateleft", "p2rotateright"}
-	
-	
-	print(unpack(controls["left"]))--]]
 end
 
 function loadoptions()
@@ -788,7 +765,8 @@ function getrainbowcolor(i)
 	return {r, g, b}
 end
 
-function love.keypressed( key, unicode )
+-- TODO: Either remove any code that expects keyboard text input or use vita touch keyboard
+function love.keypressed( key )
 	if gamestate == nil then
 		if controls.check("return", key) then
 			gamestate = "title"
@@ -1175,14 +1153,6 @@ function love.keypressed( key, unicode )
 			if highscorename[highscoreno]:len() > 0 then
 				cursorblink = true
 				highscorename[highscoreno] = string.sub(highscorename[highscoreno], 1, highscorename[highscoreno]:len()-1)
-			end
-			
-		elseif whitelist[unicode] == true then
-			if highscorename[highscoreno]:len() < 6 then
-				cursorblink = true
-				highscorename[highscoreno] = highscorename[highscoreno] .. string.char(unicode)
-				love.audio.stop(highscorebeep)
-				love.audio.play(highscorebeep)
 			end
 		end
 	elseif string.sub(gamestate, 1, 6) == "rocket" then
