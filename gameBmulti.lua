@@ -1,3 +1,5 @@
+gameBmulti_load = {}
+
 function gameBmulti_load()
 	if musicno < 4 then
 		love.audio.stop(music[musicno])

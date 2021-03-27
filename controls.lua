@@ -1,5 +1,6 @@
 controls = {}
 controls.settings = {}
+controls.vita = {}
 
 controls.settings.left = {"key", {"left"}}
 controls.settings.right = {"key", {"right"}}

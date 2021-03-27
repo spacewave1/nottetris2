@@ -1,3 +1,5 @@
+gameA = {}
+
 function gameA_load()
 	gamestate = "gameA"
 	
@@ -555,9 +557,9 @@ function removeline(lineno) --Does all necessary things to clear a line. Refines
 						end
 						
 						--save old imagedata to local var first in case we create a new bodyid..
-						backupimagedata = love.image.newImageData( tetriimagedata[i-ioffset]:getWidth(), tetriimagedata[i-ioffset]:getHeight())
+						backupimagedata = love.image.newImageDataFromDimensions( tetriimagedata[i-ioffset]:getWidth(), tetriimagedata[i-ioffset]:getHeight())
 						backupimagedata:paste(tetriimagedata[i-ioffset], 0, 0, 0, 0, tetriimagedata[i-ioffset]:getWidth(), tetriimagedata[i-ioffset]:getHeight() )
-						
+
 						--cut the image.
 						cutimage(i-ioffset, numberofgroups)
 						
@@ -599,12 +601,12 @@ function removeline(lineno) --Does all necessary things to clear a line. Refines
 						tetribodies[highestbody()]:setBullet(true)
 						tetribodies[highestbody()]:setAngularVelocity(tetribodies[i-ioffset]:getAngularVelocity())
 						
-						tetriimagedata[highestbody()] = love.image.newImageData( backupimagedata:getWidth(), backupimagedata:getHeight())
+						tetriimagedata[highestbody()] = love.image.newImageDataFromDimensions( backupimagedata:getWidth(), backupimagedata:getHeight())
 						tetriimagedata[highestbody()]:paste( backupimagedata, 0, 0, 0, 0, backupimagedata:getWidth(), backupimagedata:getHeight() )
 						tetriimages[highestbody()] = padImagedata( tetriimagedata[highestbody()] )
 						tetrikind[highestbody()] = tetrikind[i-ioffset]
 						
-						debugimagedata = love.image.newImageData( backupimagedata:getWidth(), backupimagedata:getHeight())
+						debugimagedata = love.image.newImageDataFromDimensions( backupimagedata:getWidth(), backupimagedata:getHeight())
 						debugimagedata:paste(backupimagedata, 0, 0, 0, 0, backupimagedata:getWidth(), backupimagedata:getHeight() )
 						debugimage = padImagedata( debugimagedata )
 						

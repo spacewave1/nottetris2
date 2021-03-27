@@ -1,3 +1,5 @@
+failed = {}
+
 function failed_load()
 	gamestate = "failed"
 	tetribodies = {} -- CLEAR ALL

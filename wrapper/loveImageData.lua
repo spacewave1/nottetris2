@@ -9,18 +9,26 @@
 
 LoveImageData = {
     id = 0,
-    heigth = 0,
+    height = 0,
     width = 0
 }
 
 function LoveImageData:create(o)
+    love.graphics.print("tst", 20, 60,0,1,1)
     o = o or {}
     setmetatable(o, self)
     self.__index = self
-    self.height = Graphics.getImageHeight(o.id) or 0
-    self.width = Graphics.getImageWidth(o.id) or 0
+    self.id = o.id or 0
+    self.width = o.width or 0
+    self.height = o.height or 0
     return o
 end
+
+function LoveImageData:setFilter (filterWidth, filterHeigth)
+    self.filterWidth = filterWidth
+    self.filterHeigth = filterHeigth
+end
+
 
 function LoveImageData:getHeight()
     return self.height
@@ -41,15 +49,19 @@ end
 
 -- TODO: There might occur bugs here
 function LoveImageData:paste(imageData, x, y)
+    love.graphics.print(
+      x .. " x\n" .. y .. " y\n" ..
+      imageData.width .. " from width\n" ..
+      imageData.height .. " from height\n" ..
+      LoveImageData.width .. " to width\n" ..
+      LoveImageData.height .. " to height\n", 20, 120, 0, 1, 1)
     for index_y = y,imageData.height,1
     do
         for index_x = x,imageData.width,1
         do
-            Graphics.drawPixel(index_x,index_y,imageData.id)
+            Graphics.drawPixel(index_x,index_y, Graphics.getPixel(x,y,imageData.id),LoveImageData.id)
         end
     end
-
-    Graphics.drawImage(x,y, imageData)
 end
 
 

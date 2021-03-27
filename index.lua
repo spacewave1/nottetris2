@@ -7,8 +7,8 @@
 --
 
 -- Load
-dofile("ux0:/data/lpp-vita/samples/nottetris/wrapper/love.lua")
-dofile("ux0:/data/lpp-vita/samples/nottetris2/main.lua")
+dofile("app0:/wrapper/love.lua")
+dofile("app0:/main.lua")
 
 volume = 1
 hue = 0.08
@@ -16,12 +16,18 @@ scale = suggestedscale
 fullscreen = true
 gamestate = "logo"
 
-main.init()
 
-local timer = Timer.new()
+love.init()
+
+tetrisfont = love.graphics.newFont("graphics/font/main.ttf")
+love.graphics.setFont(tetrisfont)
+
+main.load()
+
 local pad = Controls.read()
 
 while true do
+    --love.graphics.print("helloa", 20, 60, 0, 1, 1)
     -- if any key pressed send out events
     if(Controls.check(pad,SCE_CTRL_UP)) then
         main.love.keypressed("up")
@@ -40,6 +46,7 @@ while true do
     elseif(Controls.check(pad,SCE_CTRL_RTRIGGER)) then
         main.love.keypressed("x")
     end
-    --
-    main.update(math.ceil(love.timer.getTime))
+
+
+    --main.love.update(math.ceil(love.timer.getTime()))
 end

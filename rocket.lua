@@ -1,3 +1,5 @@
+rocket = {}
+
 function rocket_load()
 	rocketscores = {}
 	if gameno == 1 then

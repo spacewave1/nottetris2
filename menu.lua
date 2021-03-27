@@ -1,3 +1,5 @@
+menu = {}
+
 function menu_load()
     gamestate = "logo"
     creditstext = {

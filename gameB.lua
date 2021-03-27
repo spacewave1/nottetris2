@@ -1,3 +1,5 @@
+gameB = {}
+
 function gameB_load()
 	gamestate = "gameB"
 	

@@ -8,11 +8,7 @@
 
 LoveEnvironment = {
     id = 0,
-    backgroundColor = {
-        r = 0,
-        g = 0,
-        b = 0
-    },
+    backgroundColor = 0,
     activeFont = 0,
     timer = 0
 }
@@ -21,7 +17,9 @@ function LoveEnvironment:create(o)
     o = o or {}
     setmetatable(o, self)
     self.__index = self
-    self.timer = Timer.new()
+    self.timer = o.timer or 0
+    self.backgroundColor = o.backgroundColor or Color.new(0,0,0,0)
+    self.activeFont = o.activeFont or 0
     return o
 end
 
